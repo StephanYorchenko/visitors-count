@@ -42,12 +42,12 @@ def get_count():
 
 @app.route('/test_page1')
 def test_page():
-	return render_template('test1.html')
+	return render_template('test1.html', id=12345)
 
 
 @app.route('/test_page2')
 def another_page():
-	return render_template('test2.html')
+	return render_template('test1.html', id=321)
 
 
 if __name__ == '__main__':

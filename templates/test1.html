@@ -2,9 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test 1</title>
+    <title>Test page - {{ id }}</title>
 </head>
 <body>
-    <img src="/update_count?id=12345" style="width: 1px; height: 1px" alt="counter">
+    <img src="/update_count?id={{ id }}" style="width: 1px; height: 1px" alt="counter">
+    <h1 id="counter">Всего посещений страницы: </h1>
+    <script>
+        function getXmlHttp() {
+            let xmlhttp;
+            try {
+              xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+            try {
+              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (E) {
+              xmlhttp = false;
+            }
+            }
+            if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+              xmlhttp = new XMLHttpRequest();
+            }
+            return xmlhttp;
+        }
+
+        window.onload = () => {
+            let h_counter = document.getElementById("counter")
+            let xmlHttp = getXmlHttp();
+            xmlHttp.open("GET", '/get_count?id={{ id }}', false);
+            xmlHttp.send()
+            h_counter.innerText = "Всего посещений страницы: " + xmlHttp.responseText
+        }
+    </script>
 </body>
 </html>
