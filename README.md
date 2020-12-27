@@ -10,7 +10,13 @@
 
     ~/proj_folder/templates $python3 -m http.server или другим аналогичным способом
 
-* Проверка количества посещений: ```/get_count?id=<page_id>&period=[today|28d|all]``` - получить число посещений страницы по её идентификатору
+----
+
+Проверка количества посещений: ```http://<addr_of_server_with_counter>/get_count?id=<page_id>&period=[today|28d|all]``` - получить число посещений страницы по её идентификатору.
+
+Ответ приходит в формате json: ```{'all': int, 'unique': int}```
+
+-----
 
 ```<img src="http://<addr_of_server_with_counter>/update_count?id=<id>" alt="">``` - необходимо вставить на страницу, посещения которой хотим посчитать.
 Например, ```<img src="http://0.0.0.0:8080/update_count?id=1" alt="""```
