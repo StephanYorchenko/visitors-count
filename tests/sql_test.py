@@ -33,7 +33,8 @@ class SQLExecutorTests(unittest.TestCase):
 			for i in range(10):
 				cursor.execute(f"INSERT INTO visits "
 							   f"(page_id, client_id, visit_time) "
-							   f"VALUES ({i}, {i * 13}, '2020-12-27 12:43:00')")
+							   f"VALUES ({i}, {i * 13},"
+							   f" '2020-12-27 12:43:00')")
 				cursor.fetchall()
 			expected = []
 			for sql in sqls:
@@ -66,7 +67,8 @@ class SQLExecutorTests(unittest.TestCase):
 		with sqlite3.connect(self.name) as con:
 			cursor = con.cursor()
 			cursor.executemany(
-				"INSERT INTO visits (page_id, client_id, visit_time) VALUES (?, ?, ?)",
+				"INSERT INTO visits (page_id, client_id, visit_time) "
+				"VALUES (?, ?, ?)",
 				records)
 			cursor.fetchall()
 
