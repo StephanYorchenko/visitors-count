@@ -5,23 +5,7 @@
     <title>Test page - 1</title>
 </head>
 <body>
-    <img src="http://0.0.0.0:8080/update_count?id=1" style="width: 1px; height: 1px" alt="counter"/>
-    <h1>client_id: <span id="user_id"></span></h1>
+    <img src="http://0.0.0.0:8080/update_count?id=1" alt=""/>
     <h2>page_id: 1</h2>
-    <script>
-        function readCookie(name) {
-            let nameEQ = name + "=";
-            let ca = document.cookie.split(';');
-            for(let i=0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0)===' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
-            }
-            return null;
-        }
-        window.onload = () => {
-            document.getElementById("user_id").innerText = readCookie("id")
-        }
-    </script>
 </body>
 </html>

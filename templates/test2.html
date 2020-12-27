@@ -2,23 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test Page 2</title>
+    <title>Test Page - 2</title>
 </head>
 <body>
     <img src="http://0.0.0.0:8080/update_count?id=2" style="width: 1px; height: 1px" alt="counter"/>
-    <h1>client_id: <span id="user_id"></span></h1>
     <h2>page_id: 2</h2>
-    <script>
-        window.onload = () => {
-            let nameEQ = "id=";
-            let ca = document.cookie.split(';');
-            for(let i=0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0)===' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) === 0)
-                    document.getElementById("user_id").innerText = c.substring(nameEQ.length,c.length);
-            }
-        }
-    </script>
 </body>
 </html>
