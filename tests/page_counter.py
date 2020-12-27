@@ -1,5 +1,5 @@
 import unittest
-from routes.domain import PageStatistics
+from routes.request_handler import PageStatistics
 
 
 class MyTestCase(unittest.TestCase):

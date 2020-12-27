@@ -2,35 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test page - {{ id }}</title>
+    <title>Test page - 1</title>
 </head>
 <body>
-    <img src="/update_count?id={{ id }}" style="width: 1px; height: 1px" alt="counter">
-    <h1 id="counter">Всего посещений страницы: </h1>
+    <img src="http://0.0.0.0:8080/update_count?id=1" style="width: 1px; height: 1px" alt="counter"/>
+    <h1>client_id: <span id="user_id"></span></h1>
+    <h2>page_id: 1</h2>
     <script>
-        function getXmlHttp() {
-            let xmlhttp;
-            try {
-              xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-            } catch (e) {
-            try {
-              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (E) {
-              xmlhttp = false;
+        function readCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for(let i=0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0)===' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
             }
-            }
-            if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
-              xmlhttp = new XMLHttpRequest();
-            }
-            return xmlhttp;
+            return null;
         }
-
         window.onload = () => {
-            let h_counter = document.getElementById("counter")
-            let xmlHttp = getXmlHttp();
-            xmlHttp.open("GET", '/get_count?id={{ id }}', false);
-            xmlHttp.send()
-            h_counter.innerText = "Всего посещений страницы: " + xmlHttp.responseText
+            document.getElementById("user_id").innerText = readCookie("id")
         }
     </script>
 </body>
