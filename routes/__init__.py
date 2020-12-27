@@ -1,6 +1,7 @@
 from flask import Blueprint
 
-from infrastucture.storage import StatStorage, SQLExecutor
+from infrastucture.storage import StatStorage
+from infrastucture.sql_executor import SQLExecutor
 from .request_handler import RequestHandler
 
 Routes = Blueprint("routes", __name__, template_folder="templates")
