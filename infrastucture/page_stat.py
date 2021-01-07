@@ -18,4 +18,4 @@ class PageStatistics:
 
     @staticmethod
     def get_time():
-        return f'\'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\''
+        return f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}'

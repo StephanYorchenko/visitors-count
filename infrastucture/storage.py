@@ -17,28 +17,30 @@ class StatStorage:
             "visits",
             visit_time=time,
             page_id=page.id,
-            client_id=f'"{visitor_id}"'
+            client_id=str(visitor_id)
         )
 
     def get_all_stat(self, page_id):
         return PageStatistics.from_data(self, page_id)
 
     def get_count(self, page_id, period):
-        if period != 'ALL_STAT':
+        if period != "ALL_STAT":
+            print('hello')
             return dict(
                 all=self.database.count_all(page_id, period),
                 unique=self.database.count_all(page_id, period, unique=True),
             )
-        print('here')
+        print("here")
         return dict(
-                all_today=self.database.count_all(page_id, "-1 day"),
-                unique_today=self.database.count_all(page_id, "-1 day", unique=True),
-                all_28d=self.database.count_all(page_id,"-28 day"),
-                unique_28d=self.database.count_all(page_id, "-28 day",
-                                                     unique=True),
-                all=self.database.count_all(page_id, "-4000 year"),
-                unique=self.database.count_all(page_id, "-4000 year",
-                                                     unique=True),
+            all_today=self.database.count_all(page_id, "-1 day"),
+            unique_today=self.database.count_all(page_id, "-1 day",
+                                                 unique=True),
+            all_28d=self.database.count_all(page_id, "-28 day"),
+            unique_28d=self.database.count_all(page_id, "-28 day",
+                                               unique=True),
+            all=self.database.count_all(page_id, "-4000 year"),
+            unique=self.database.count_all(page_id, "-4000 year",
+                                           unique=True),
         )
 
     @classmethod

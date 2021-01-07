@@ -18,11 +18,11 @@ class SQLExecutor:
             cursor.close()
         return result
 
-    def try_insert(self, table, **kwargs):
+    def try_insert(self, table, page_id, client_id, visit_time):
         sql = f"INSERT OR IGNORE INTO {table} " \
               f"(page_id, client_id, visit_time) " \
               f"VALUES (?, ?, ?);"
-        return self.execute(sql, list(kwargs.values()))
+        return self.execute(sql, [page_id, client_id, visit_time])
 
     def _exist_or_create(self):
         if isfile(self.database_name) and not self.debug:
