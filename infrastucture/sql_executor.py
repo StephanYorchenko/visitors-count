@@ -3,8 +3,9 @@ from os.path import isfile
 
 
 class SQLExecutor:
-    def __init__(self, database_name="database.db"):
+    def __init__(self, database_name="database.db", debug=False):
         self.database_name = database_name
+        self.debug = debug
         self._exist_or_create()
 
     def execute(self, sql_string):
@@ -22,7 +23,7 @@ class SQLExecutor:
         return self.execute(sql)
 
     def _exist_or_create(self):
-        if isfile(self.database_name):
+        if isfile(self.database_name) and not self.debug:
             return
         conn = sqlite3.connect(self.database_name)
         conn.close()

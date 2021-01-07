@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import tempfile
 import unittest
 from datetime import datetime
 from os.path import isfile
@@ -9,11 +10,12 @@ from infrastucture import SQLExecutor
 
 class SQLExecutorTests(unittest.TestCase):
     def setUp(self):
-        self.name = "test_base.db"
-        self.sql_executor = SQLExecutor(self.name)
+        self.fd, self.name = tempfile.mkstemp(suffix='.db')
+        self.sql_executor = SQLExecutor(self.name, debug=True)
 
     def tearDown(self) -> None:
-        os.remove(self.name)
+        os.close(self.fd)
+        os.unlink(self.name)
 
     def test_initialize(self):
         self.assertTrue(isfile(self.name))

@@ -1,12 +1,15 @@
 from flask import Flask, Blueprint
 
-from routes import Routes
+from image_generator import ImageGenerator
+from infrastucture import SQLExecutor, StatStorage
+from routes import RoutesFactory, RequestHandler
 
 
 class AppFactory:
     @staticmethod
     def make_app(routes: 'Blueprint'):
         app = Flask(__name__)
+
         app.register_blueprint(routes)
 
         @app.after_request
@@ -22,5 +25,11 @@ class AppFactory:
 
 
 if __name__ == "__main__":
-    app = AppFactory.make_app(Routes)
+    sql_executor = SQLExecutor()
+    storage = StatStorage.make_with_executor(sql_executor)
+    image_generator = ImageGenerator()
+    routes = RoutesFactory.make_routes(storage,
+                                       image_generator,
+                                       RequestHandler)
+    app = AppFactory.make_app(routes)
     app.run(host="0.0.0.0", port=8080)
