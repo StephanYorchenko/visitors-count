@@ -5,7 +5,6 @@ from PIL import Image, ImageDraw
 
 class ImageGenerator:
 	def make_image(self, stat=None):
-		print(stat)
 		return self._text_on_img(text=stat)
 
 	@staticmethod

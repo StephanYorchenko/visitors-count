@@ -28,7 +28,7 @@ class RequestHandler:
 		page_id = request.args.get("id")
 		period = request.args.get("period") or "all"
 		if not id or period not in self.periods:
-			raise abort(404)
+			raise abort(400)
 		period = self.periods[period]
 		return jsonify(self.store_page[page_id].get_count(period))
 
@@ -36,13 +36,13 @@ class RequestHandler:
 		page_id = request.args.get("id")
 		period = request.args.get("period") or "all"
 		if not id or period not in self.periods:
-			raise abort(404)
+			raise abort(400)
 		period = self.periods[period]
 		a = self.store_page[page_id].get_count(period)
 		print(a)
 		stat = '\n'.join(map(str, a.values()))
 		response = make_response(
-				send_file(self.image_generator.make_image(stat), as_attachment=True,
+				send_file(self.image_generator.make_image(stat), as_attachment=False,
 						  attachment_filename="stat.png")
 		)
 		return response

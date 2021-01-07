@@ -10,11 +10,10 @@ from infrastucture import SQLExecutor
 class SQLExecutorTests(unittest.TestCase):
     def setUp(self):
         self.name = "test_base.db"
-        try:
-            os.remove(self.name)
-        except FileNotFoundError:
-            pass
         self.sql_executor = SQLExecutor(self.name)
+
+    def tearDown(self) -> None:
+        os.remove(self.name)
 
     def test_initialize(self):
         self.assertTrue(isfile(self.name))
