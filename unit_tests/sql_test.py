@@ -51,7 +51,7 @@ class SQLExecutorTests(unittest.TestCase):
             for sql in sqls:
                 cursor.execute(sql)
                 expected.append(cursor.fetchall())
-        actual = [self.sql_executor.execute(sql) for sql in sqls]
+        actual = [self.sql_executor.execute(sql, None) for sql in sqls]
         self.assertListEqual(expected, actual)
 
     def test_insert(self):
