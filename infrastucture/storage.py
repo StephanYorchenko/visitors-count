@@ -25,12 +25,10 @@ class StatStorage:
 
     def get_count(self, page_id, period):
         if period != "ALL_STAT":
-            print('hello')
             return dict(
                 all=self.database.count_all(page_id, period),
                 unique=self.database.count_all(page_id, period, unique=True),
             )
-        print("here")
         return dict(
             all_today=self.database.count_all(page_id, "-1 day"),
             unique_today=self.database.count_all(page_id, "-1 day",

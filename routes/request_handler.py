@@ -41,7 +41,6 @@ class RequestHandler:
     def get_image(self):
         page_id = request.args.get("id")
         a = self.store_page[page_id].get_count(self.periods["today"])
-        print(a)
         stat = "\n".join(map(str, a.values()))
         response = make_response(
             send_file(
